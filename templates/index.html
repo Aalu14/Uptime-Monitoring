@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Uptime Monitoring Dashboard</title>
+    <style>
+        .navbar {
+            background-color: #0b1220;
+            /* Dark navy background */
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            font-family: Arial, sans-serif;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .navbar .logo span {
+            color: #773bb3;
+            /* Green dot color */
+            margin-right: 5px;
+        }
+
+        .navbar .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .navbar .nav-links a {
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .navbar .nav-links a:hover {
+            color: #773bb3;
+            /* Green hover color */
+        }
+
+        .navbar .auth-buttons {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .navbar .auth-buttons a {
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .navbar .auth-buttons .login {
+            color: #ffffff;
+        }
+
+        .navbar .auth-buttons .register {
+            background-color: #773bb3;
+            /* Green background */
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .navbar .auth-buttons .register:hover {
+            background-color: #773bb3;
+            /* Darker green on hover */
+        }
+
+        /* Top Section Styling */
+        .top-section {
+            background-color: #0b1220;
+            /* Purple Background */
+            color: #fff;
+            padding: 50px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .top-section h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .top-section h1 span {
+            color: #773bb3;
+            /* Green color for "uptime monitoring" */
+        }
+
+        .top-section p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .top-section p span {
+            font-weight: bold;
+            color: #773bb3;
+            /* Green for "50 monitors" */
+        }
+
+        .top-section .stats {
+            margin-top: 30px;
+            font-size: 1rem;
+            color: #f7f2f2;
+        }
+
+        .stats span {
+            font-weight: bold;
+            color: #fff;
+            /* White for numbers */
+        }
+
+        .top-section .logo-image {
+            flex: 1;
+            text-align: right;
+        }
+
+        .top-section .logo-image img {
+            max-width: 80%;
+            height: auto;
+        }
+
+        /* Company Logos Section */
+        .company-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+            padding: 0 20px;
+        }
+
+        .company-logos img {
+            max-width: 120px;
+            height: auto;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .company-logos img:hover {
+            opacity: 1;
+        }
+
+        /* General Section Styling */
+        .monitoring-options {
+            text-align: center;
+            padding: 50px 20px;
+            background-color: #f9fafb;
+        }
+
+        .monitoring-options h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        .monitoring-options .highlight {
+            color: #622468;
+            /* Green color for "monitored" */
+        }
+
+        /* Cards Container */
+        .monitoring-cards {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Individual Card */
+        .card {
+            background-color: #ffffff;
+            width: 300px;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Card Icon */
+        .card-icon img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+        }
+
+        /* Card Content */
+        .card-content h2 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .card-content p {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        /* Button Styling */
+        .card-button {
+            display: inline-block;
+            background-color: #773bb3;
+            color: #f7eef7;
+            font-size: 1rem;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .card-button:hover {
+            background-color: #521d4b;
+            transform: translateY(-3px);
+        }
+
+        /* "Made for You" Section Styling */
+        /* "Made for You" Section Styling */
+        .made-for-you {
+            margin: 50px auto;
+            padding: 20px;
+            max-width: 1200px;
+        }
+
+        .made-for-you h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .cards-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            /* Ensures wrapping on smaller screens */
+        }
+
+        .card {
+            background-color: #ffffff;
+            width: 250px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            flex: 1;
+            /* Ensures equal spacing */
+            max-width: 250px;
+        }
+
+        .card img {
+
+            width: 100px;
+            height: 100px;
+            margin-bottom: 15px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+
+
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            margin: 10px 0;
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: #555;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Responsive Design for Smaller Screens */
+        @media (max-width: 768px) {
+            .cards-container {
+                flex-direction: column;
+                /* Stack cards vertically on small screens */
+                align-items: center;
+            }
+        }
+
+        /* Monitor Section Styling */
+        .monitor-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 50px auto;
+            max-width: 1200px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .monitor-content {
+            flex: 1;
+            text-align: left;
+            padding-right: 20px;
+        }
+
+        .monitor-content h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .monitor-content p {
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .monitor-features {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .feature span {
+            font-size: 1.2rem;
+            color: 773bb3;
+            margin-right: 10px;
+        }
+
+        .monitor-image {
+            flex: 1;
+            text-align: right;
+        }
+
+        .monitor-image img {
+            max-width: 100%;
+            height: 300px;
+            border-radius: 12px;
+        }
+
+        .ssl-alert-section {
+            background-color: #f9fafb;
+            /* Light gray background */
+            padding: 50px 20px;
+        }
+
+        .ssl-alert-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            /* For responsive stacking */
+            text-align: left;
+        }
+
+        .ssl-alert-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .ssl-alert-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            /* Subtle shadow */
+        }
+
+        .ssl-alert-content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .ssl-alert-content h2 {
+            font-size: 2rem;
+            color: #0e0d0d;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .ssl-alert-content h2 span {
+            color: #773bb3;
+        }
+
+        .ssl-alert-content p {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .ssl-alert-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .ssl-alert-content {
+                padding: 10px;
+            }
+
+            .ssl-alert-image img {
+                max-width: 70%;
+                /* Resize image on smaller screens */
+            }
+        }
+
+        .footer-section {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            padding: 50px 20px;
+            text-align: left;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            max-height: 1000px;
+            margin: 0 auto;
+            gap: 20px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .footer-column h3 .dot {
+            color: #773bb3;
+            /* Green accent for dots */
+        }
+
+        .footer-column p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #d1d1d1;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column ul li a:hover {
+            color: #773bb3;
+            /* Green hover color */
+        }
+
+
+        .social-icons a {
+            color: #ffffff;
+            font-size: 1.2rem;
+            margin-right: 15px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #773bb3;
+            /* Green hover color */
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-column {
+                text-align: center;
+            }
+
+            .social-icons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <span>•</span> Monitoring
+        </div>
+        <div class="nav-links">
+            <a href="#monitoring">Monitoring</a>
+            <a href="#resources">Resources</a>
+            <a href="#contact">Contact</a>
+            <a href="#pricing">Pricing</a>
+        </div>
+        <div class="auth-buttons">
+            <a href="#login" class="login">Log In</a>
+            <a href="#register" class="register">Register for FREE</a>
+        </div>
+    </div>
+    <!-- Top Section -->
+    <div class="top-section">
+        <h1>The world's leading <span>uptime monitoring</span> service.</h1>
+        <p>Get <span>50 monitors</span> with 5-minute checks totally FREE.</p>
+        <div class="stats">
+            <p> Currently, we keep an eye on 7,570,000 monitors for more than 2,100,000 users and
+                companies.</p>
+        </div>
+        <img src="{{ url_for('static', filename='images/monitorG.png') }}" alt="Monitoring Graphic">
+    </div>
+    <!-- Monitoring Options Section -->
+    <div class="monitoring-options">
+        <h1>All you really care about <span class="highlight">monitored</span> in one place.</h1>
+        <div class="monitoring-cards">
+            <!-- Website Monitoring Card -->
+            <div class="card">
+                <div class="card-icon">
+                    <img src="{{ url_for('static', filename='images/web.png') }}" alt="Website Monitoring Icon">
+                </div>
+                <div class="card-content">
+                    <h2>Website monitoring</h2>
+                    <p>Be the first to know that your website is down! Reliable monitoring warns you before any
+                        significant trouble and saves you money.</p>
+                    <a href="/website-monitoring" class="card-button">Website monitoring</a>
+                </div>
+            </div>
+
+            <!-- SSL Monitoring Card -->
+            <div class="card">
+                <div class="card-icon">
+                    <img src="{{ url_for('static', filename='images/ssl.png') }}" alt="SSL Monitoring Icon">
+                </div>
+                <div class="card-content">
+                    <h2>SSL monitoring</h2>
+                    <p>Don't lose visitors because of an expired SSL certificate. Get notified 30, 14, and 7 days before
+                        expiration date. Stay informed about SSL expiration.</p>
+                    <a href="/ssl-monitoring" class="card-button">SSL monitoring</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- "Made for You" Section -->
+    <div class="made-for-you">
+        <h2>Made for you —</h2>
+        <div class="cards-container">
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/image-removebg-preview.png') }}">
+                <h3>Startups</h3>
+                <p>You’ve just launched your project, and want to minimize risk of downtime.</p>
+            </div>
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/b.png') }}">
+                <h3>Business</h3>
+                <p>You need to avoid lost revenue from a website outage.</p>
+            </div>
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/e.png') }}">
+                <h3>E-Commerce</h3>
+                <p>You need to keep your online retail business running 24/7.</p>
+            </div>
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/d.png') }}">
+                <h3>Developers</h3>
+                <p>You need advanced settings to set up requests and responses.</p>
+            </div>
+        </div>
+    </div>
+    <div class="monitor-section">
+        <div class="monitor-content">
+            <h2>Monitor from around the world</h2>
+            <p>
+                Pulsetic now monitors from more data centers around the world to guarantee redundancy and localize
+                outages.
+                We'll show in which part of the world your website is down or slow.
+            </p>
+            <div class="monitor-features">
+                <div class="feature">
+                    <span>✔</span>
+                    Get detailed regional information, like uptime or response time
+                </div>
+                <div class="feature">
+                    <span>✔</span>
+                    Avoid false positive alerts if one data center loses connection
+                </div>
+                <div class="feature">
+                    <span>✔</span>
+                    Know when your website is down in a certain region
+                </div>
+            </div>
+        </div>
+        <div class="monitor-image">
+            <img src="{{ url_for('static', filename='images/monitor.png') }}" alt="Monitor Image">
+        </div>
+    </div>
+    <div class="ssl-alert-section">
+        <div class="ssl-alert-container">
+            <!-- Image -->
+            <div class="ssl-alert-image">
+                <img src="{{ url_for('static', filename='images/sslm.png') }}" alt="SSL Alert Icon">
+            </div>
+            <!-- Text Content -->
+            <div class="ssl-alert-content">
+                <h2>Get alerts about <span>SSL certificate errors</span>.</h2>
+                <p>Set up an SSL monitoring within the main HTTPS monitoring of your website and get notified of any SSL
+                    certificate errors automatically.</p>
+            </div>
+        </div>
+    </div>
+    <footer class="footer-section">
+        <div class="footer-container">
+            <!-- UptimeRobot Section -->
+            <div class="footer-column">
+                <h3><span class="dot">•</span> Monitoring</h3>
+                <p>Downtime happens. Get notified!</p>
+                <p>Join more than 2,100,000 happy users! Monitoring is one of the most popular website monitoring
+                    services in the world.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+            <!-- Monitoring Links -->
+            <div class="footer-column">
+                <h3>Monitoring<span class="dot">.</span></h3>
+                <ul>
+                    <li><a href="#website-monitoring">Website monitoring</a></li>
+                    <li><a href="#ssl-monitoring">SSL monitoring</a></li>
+
+                </ul>
+            </div>
+            <!-- Company Links -->
+            <div class="footer-column">
+                <h3>Company<span class="dot">.</span></h3>
+                <ul>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#blog">Blog</a></li>
+
+                </ul>
+            </div>
+            <!-- Resources Links -->
+            <div class="footer-column">
+                <h3>Resources<span class="dot">.</span></h3>
+                <ul>
+                    <li><a href="#integrations">Integrations</a></li>
+
+                    <li><a href="#help-center">Help center</a></li>
+
+                    <li><a href="#knowledge-hub">Knowledge hub</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+2024-12-14 18:00:54 - https://www.google.com/ is UP
+2024-12-14 18:00:56 - https://www.youtube.com/ is UP
+2024-12-14 18:00:57 - https://www.harvard.edu/ is UP
+2024-12-14 18:00:58 - https://nonexistentwebsite12345.com is DOWN
+2025-01-06 13:24:09 - https://gemini.google.com/app/733a44ad96532950?hl=en-IN is UP
+ERROR:root:Error sending Slack alert: The request to the Slack API failed. (url: https://slack.com/api/chat.postMessage)
+The server responded with: {'ok': False, 'error': 'invalid_auth'}
+2025-01-06 14:46:01 - https://gemini.google.com/app/733a44ad96532950?hl=en-IN is UP
+2025-01-06 14:46:04 - https://fedoraproject.org/workstation/download is UP
+2025-01-06 14:46:06 - https://www.youtube.com/watch?v=rCug8kKtlxc is UP
+2025-01-06 14:46:09 - https://mail.google.com/mail/u/0/#inbox is UP
+2025-01-06 14:46:12 - https://mail.google.com/mail/u/0/#inbox is UP
+2025-01-07 00:25:40 - https://gemini.google.com/app/733a44ad96532950?hl=en-IN is UP
+2025-01-07 00:25:43 - https://fedoraproject.org/workstation/download is UP
+2025-01-07 00:25:48 - https://www.youtube.com/watch?v=rCug8kKtlxc is UP
+2025-01-07 00:25:51 - https://mail.google.com/mail/u/0/#inbox is UP
+2025-01-07 00:25:55 - https://mail.google.com/mail/u/0/#inbox is UP
+2025-01-07 00:25:58 - https://app.slack.com/client/TFBJ36QDT/C085Q4A7CN4 is UP
+2025-01-07 00:26:07 - https://pikashow.su/ is UP
+2025-01-07 00:26:16 - https://chatgpt.com/c/677c1ac7-ede8-8004-bcf6-2b8a325450e9 is DOWN

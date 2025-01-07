@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSL Monitoring Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f9fafb;
+            color: #333;
+            padding: 20px;
+        }
+
+        .result-box {
+            background: #ffffff;
+            padding: 20px;
+            margin: 20px auto;
+            width: 90%;
+            max-width: 400px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .success {
+            color: green;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>SSL Monitoring Result</h1>
+    <div class="result-box">
+        {% if ssl_expiration %}
+            <p class="success">SSL certificate for <strong>{{ domain }}</strong> is valid until:</p>
+            <p><strong>{{ ssl_expiration }}</strong></p>
+        {% else %}
+            <p class="error">Error: {{ error_message }}</p>
+        {% endif %}
+    </div>
+    <a href="/">Check Another Domain</a>
+</body>
+</html>

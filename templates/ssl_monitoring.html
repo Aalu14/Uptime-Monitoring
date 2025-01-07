@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSL Monitoring</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f9fafb;
+            color: #333;
+            padding: 20px;
+        }
+
+        form {
+            background: #ffffff;
+            padding: 20px;
+            margin: 20px auto;
+            width: 90%;
+            max-width: 400px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        form input[type="text"], form button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        form button {
+            background: #6a5af9;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background: #5849c6;
+        }
+    </style>
+</head>
+<body>
+    <h1>SSL Monitoring</h1>
+    <p>Enter a domain to check its SSL certificate expiration date.</p>
+    <form method="POST" action="/ssl-monitoring">
+        <input type="text" name="domain" placeholder="Enter domain (e.g., example.com)" required>
+        <button type="submit">Check SSL</button>
+    </form>
+</body>
+</html>

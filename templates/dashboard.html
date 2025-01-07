@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Uptime Monitoring Dashboard</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9fafb;
+            color: #333;
+            text-align: center;
+        }
+
+        header {
+            padding: 50px 20px;
+            background-color: #ffffff;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #333;
+            margin: 0;
+        }
+
+        header p {
+            font-size: 1rem;
+            color: #555;
+            margin: 10px 0 0;
+            line-height: 1.6;
+        }
+
+        /* Table Styling */
+        table {
+            margin: 30px auto;
+            width: 90%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #f1f1f1;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        td {
+            font-size: 0.9rem;
+        }
+
+        .up {
+            color: green;
+            font-weight: bold;
+        }
+
+        .down {
+            color: red;
+            font-weight: bold;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Form Styling */
+        form {
+            margin: 20px auto;
+            width: 90%;
+            max-width: 500px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        form input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: border-color 0.2s ease-in-out;
+        }
+
+        form input[type="text"]:focus {
+            border-color: #773bb3;
+            outline: none;
+        }
+
+        form button {
+            width: 100%;
+            padding: 12px;
+            background-color: #773bb3;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        form button:hover {
+            background-color: #5849c6;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>Website Uptime Monitoring Service</h1>
+        <p>Get notified if your website goes down. Receive alerts on Slack or email when downtime occurs, and keep your
+            services running smoothly.</p>
+    </header>
+
+    <!-- Form Section -->
+    <form method="POST" action="/">
+        <input type="text" name="url" placeholder="Enter website URL" required>
+        <input type="text" name="description" placeholder="Enter description" required>
+        <button type="submit">Add Website</button>
+    </form>
+
+    <!-- Table Section -->
+    <table>
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Website URL</th>
+                <th>Status</th>
+                <th>Last Checked</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for url_doc in urls %}
+            <tr>
+                <td>{{ url_doc.description }}</td>
+                <td>{{ url_doc.url }}</td>
+                <td class="{{ 'up' if url_doc.status == 'UP' else 'down' }}">{{ url_doc.status }}</td>
+                <td>{{ url_doc.last_checked if url_doc.last_checked else 'Never' }}</td>
+                <td>
+                    <a href="{{ url_for('delete_url', url=url_doc.url|urlencode) }}"
+                        style="color: red; text-decoration: none;">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
