@@ -10,11 +10,9 @@ app = Flask(__name__)
 
 HOMEPAGE = "dashboard.html"
 
-# MongoDB connection
 client = pymongo.MongoClient("mongodb+srv://aleenaarif14:123@cluster0.9vkt7.mongodb.net/dev?retryWrites=true&w=majority&appName=Cluster0")
 db = client["uptime_monitoring"]
 urls_collection = db["urls"]
-
 
 def check_url_status():
     """Check the status of URLs and update them in the database."""
@@ -29,7 +27,6 @@ def check_url_status():
             status[url] = "DOWN"
         urls_collection.update_one({"url": url}, {"$set": {"status": status[url], "last_checked": datetime.now()}})
     return status
-
 
 @app.route("/")
 def index():

@@ -18,3 +18,33 @@ The server responded with: {'ok': False, 'error': 'invalid_auth'}
 2025-01-07 00:25:58 - https://app.slack.com/client/TFBJ36QDT/C085Q4A7CN4 is UP
 2025-01-07 00:26:07 - https://pikashow.su/ is UP
 2025-01-07 00:26:16 - https://chatgpt.com/c/677c1ac7-ede8-8004-bcf6-2b8a325450e9 is DOWN
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "check_and_alert" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+INFO:apscheduler.scheduler:Scheduler has been shut down
+2025-01-07 15:15:14 - https://gemini.google.com/app/733a44ad96532950?hl=en-IN is UP
+2025-01-07 15:15:16 - https://fedoraproject.org/workstation/download is UP
+2025-01-07 15:15:18 - https://www.youtube.com/watch?v=rCug8kKtlxc is UP
+2025-01-07 15:15:21 - https://mail.google.com/mail/u/0/#inbox is UP
+2025-01-07 15:15:24 - https://mail.google.com/mail/u/0/#inbox is UP
+2025-01-07 15:15:25 - https://app.slack.com/client/TFBJ36QDT/C085Q4A7CN4 is UP
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "check_and_alert" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:apscheduler.scheduler:Scheduler started
+INFO:apscheduler.scheduler:Added job "run_monitoring_task" to job store "default"
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:apscheduler.scheduler:Scheduler started
+INFO:apscheduler.scheduler:Added job "run_monitoring_task" to job store "default"
+INFO:apscheduler.executors.default:Running job "run_monitoring_task (trigger: cron[hour='15', minute='17'], next run at: 2025-01-07 15:17:00 PKT)" (scheduled at 2025-01-07 15:17:00+05:00)
+2025-01-07 15:17:02 - https://gemini.google.com/app/733a44ad96532950?hl=en-IN is UP
+2025-01-07 15:17:05 - https://fedoraproject.org/workstation/download is UP
+2025-01-07 15:17:07 - https://www.youtube.com/watch?v=rCug8kKtlxc is UP
+2025-01-07 15:17:09 - https://mail.google.com/mail/u/0/#inbox is UP
+2025-01-07 15:17:12 - https://mail.google.com/mail/u/0/#inbox is UP
+2025-01-07 15:17:13 - https://app.slack.com/client/TFBJ36QDT/C085Q4A7CN4 is UP
+2025-01-07 15:17:19 - https://pikashow.su/ is UP
+2025-01-07 15:17:20 - https://chatgpt.com/c/677c1ac7-ede8-8004-bcf6-2b8a325450e9 is DOWN
+INFO:apscheduler.executors.default:Job "run_monitoring_task (trigger: cron[hour='15', minute='17'], next run at: 2025-01-08 15:17:00 PKT)" executed successfully
+INFO:apscheduler.scheduler:Scheduler has been shut down
