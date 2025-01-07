@@ -1,0 +1,12 @@
+name: app
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - mongoDBURL=mongodb+srv://aleenaarif14:123@cluster0.9vkt7.mongodb.net/dev?retryWrites=true&w=majority&appName=Cluster0
+    volumes:
+      - .:/app
